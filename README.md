@@ -10,7 +10,7 @@
 
 3. Run install.sh:
 
-`./install.sh`
+`sudo ./install.sh`
 
 4. Reload systemd using command: 
 
