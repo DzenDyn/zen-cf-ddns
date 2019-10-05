@@ -4,25 +4,29 @@
 
 `git clone https://github.com/DzenDyn/zen-cf-ddns.git`
 
-2. Go to created folder and make the install.sh file executable:
+2. Install the python3-pip if you do not have it:
+
+`sudo apt install python3-pip`
+
+3. Go to created folder and make the install.sh file executable:
 
 `cd zen-cf-ddns`
 
 `chmod +x install.sh`
 
-3. Run install.sh:
+4. Run install.sh:
 
 `sudo ./install.sh`
 
-4. Reload systemd using command: 
+5. Reload systemd using command: 
 
-`systemctl daemon-reload`
+`sudo systemctl daemon-reload`
 
-5. Enable auto start using command:
+6. Enable auto start using command:
 
-`systemctl enable zen-cf-ddns.service`
+`sudo systemctl enable zen-cf-ddns.service`
 
-6. Change settings in /etc/zen-cf-ddns.conf:
+7. Change settings in /etc/zen-cf-ddns.conf:
 
 `
 sudoedit /etc/zen-cf-ddns.conf
