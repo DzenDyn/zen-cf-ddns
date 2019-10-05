@@ -25,7 +25,7 @@ sudo apt install python3-pip
 
 6. Install service:
 ```
-cp zen-cf-ddns.service /lib/systemd/system/zen-cf-ddns.service`
+cp zen-cf-ddns.service /lib/systemd/system/zen-cf-ddns.service
 mkdir /usr/bin/zen-cf-ddns/ 
 cp zen-cf-ddns.py /usr/bin/zen-cf-ddns/zen-cf-ddns.py
 cp zen-cf-ddns.conf /etc/zen-cf-ddns.conf
