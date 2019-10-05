@@ -28,10 +28,10 @@ Change username with your system username
 
 6. Install service:
 ```
-cp zen-cf-ddns.service /lib/systemd/system/zen-cf-ddns.service
-mkdir /usr/bin/zen-cf-ddns/ 
-cp zen-cf-ddns.py /usr/bin/zen-cf-ddns/zen-cf-ddns.py
-cp zen-cf-ddns.conf /etc/zen-cf-ddns.conf
+sudo cp zen-cf-ddns.service /lib/systemd/system/zen-cf-ddns.service
+sudo mkdir /usr/bin/zen-cf-ddns/ 
+sudo cp zen-cf-ddns.py /usr/bin/zen-cf-ddns/zen-cf-ddns.py
+sudo cp zen-cf-ddns.conf /etc/zen-cf-ddns.conf
 ```
 
 7. Reload systemd using command: 
