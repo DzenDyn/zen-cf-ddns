@@ -47,6 +47,7 @@ sudo cp zen-cf-ddns.conf /etc/zen-cf-ddns.conf
 `
 sudoedit /etc/zen-cf-ddns.conf
 `
+
 This is a JSON configuration file, so its easy to configure.
 Do not forget to specify a place to store logs. The user must have permissions to write to this directory.
 
