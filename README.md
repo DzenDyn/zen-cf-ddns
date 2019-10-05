@@ -51,5 +51,13 @@ sudoedit /etc/zen-cf-ddns.conf
 This is a JSON configuration file, so its easy to configure.
 Do not forget to specify a place to store logs. The user must have permissions to write to this directory.
 
+Now you can start, stop, restart or status with:
+```
+sudo service zen-cf-ddns start
+sudo service zen-cf-ddns stop
+sudo service zen-cf-ddns restart
+sudo service zen-cf-ddns status
+
+```
 
 The project was based on a library [python-cloudflare](https://github.com/cloudflare/python-cloudflare "python-cloudflare") and uses Cloudflare API.
