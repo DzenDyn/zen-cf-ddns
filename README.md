@@ -1,18 +1,18 @@
-**How to install**
+## How to install
 
-Clone repo:
+1. Clone repo:
 
 `git clone https://github.com/DzenDyn/zen-cf-ddns.git`
 
-Make the install.sh file executable:
+2. Make the install.sh file executable:
 
 `chmod +x install.sh`
 
-Run install.sh:
+3. Run install.sh:
 
 `./install.sh`
 
-Reload systemd using command: 
+4. Reload systemd using command: 
 
 `systemctl daemon-reload`
 
