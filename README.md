@@ -20,8 +20,11 @@ sudo apt install python3-pip
 `python3 -m pip install -r requirements.txt`
 
 5. Edit zen-cf-ddns.service file:
+``` 
+nano zen-cf-ddns.service
+Change username with your system username
+```
 
-`Change username with your system username`
 
 6. Install service:
 ```
