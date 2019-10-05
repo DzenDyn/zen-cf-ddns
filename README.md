@@ -4,9 +4,10 @@
 
 `git clone https://github.com/DzenDyn/zen-cf-ddns.git`
 
-2. Make the install.sh file executable:
+2. Go to created folder and make the install.sh file executable:
 
-`chmod +x install.sh`
+`cd zen-cf-ddns
+chmod +x install.sh`
 
 3. Run install.sh:
 
