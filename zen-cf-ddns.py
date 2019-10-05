@@ -8,7 +8,7 @@ import logging
 
 with open('/etc/zen-cf-ddns.conf', 'r') as f:
     settings = json.load(f)
-logging.basicConfig(filename='/var/log/zen-cf-ddns.log', level=logging.DEBUG, format='%(levelname)s:%(message)s')
+logging.basicConfig(filename=settings['log_file'], level=logging.DEBUG, format='%(levelname)s:%(message)s')
 
 
 def my_ip_address():
