@@ -1,4 +1,4 @@
-## How to install
+## How to install and use
 
 1. Clone repo:
 
@@ -16,3 +16,18 @@
 
 `systemctl daemon-reload`
 
+5. Enable auto start using command:
+
+`systemctl enable zen-cf-ddns.service`
+
+6. Change settings in /etc/zen-cf-ddns.conf:
+
+`
+sudoedit /etc/zen-cf-ddns.conf
+`
+
+This is a JSON configuration file, so its easy to configure.
+
+The log is written to /var/log/zen-cf-ddns.log.
+
+The project was based on a library [python-cloudflare](https://github.com/cloudflare/python-cloudflare "python-cloudflare") and uses Cloudflare API.
