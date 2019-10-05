@@ -7,6 +7,7 @@
 2. Go to created folder and make the install.sh file executable:
 
 `cd zen-cf-ddns
+
 chmod +x install.sh`
 
 3. Run install.sh:
