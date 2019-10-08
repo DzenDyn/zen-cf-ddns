@@ -4,6 +4,7 @@ import json
 import requests
 import time
 import logging
+import datetime
 
 
 with open('/etc/zen-cf-ddns.conf', 'r') as f:
@@ -22,10 +23,10 @@ def my_ip_address():
     try:
         ip_address = requests.get(url).text
     except:
-        logging.error('%s: failed' % url)
+        logging.error('%s: %s: failed' % (datetime.datetime.now(), url))
         return
     if ip_address == '':
-        logging.error('%s: failed' % url)
+        logging.error('%s: %s: failed' % (datetime.datetime.now(), url))
         return
 
     if ':' in ip_address:
@@ -43,7 +44,7 @@ def do_dns_update(cf, zone_name, zone_id, dns_name, ip_address, ip_address_type)
         params = {'name':dns_name, 'match':'all', 'type':ip_address_type}
         dns_records = cf.zones.dns_records.get(zone_id, params=params)
     except CloudFlare.exceptions.CloudFlareAPIError as e:
-        logging.error('/zones/dns_records %s - %d %s - api call failed' % (dns_name, e, e))
+        logging.error('%s: /zones/dns_records %s - %d %s - api call failed' % (datetime.datetime.now(), dns_name, e, e))
         return
 
     updated = False
@@ -60,11 +61,11 @@ def do_dns_update(cf, zone_name, zone_id, dns_name, ip_address, ip_address_type)
         if ip_address_type != old_ip_address_type:
             # only update the correct address type (A or AAAA)
             # we don't see this becuase of the search params above
-            logging.info('IGNORED: %s %s ; wrong address family' % (dns_name, old_ip_address))
+            logging.info('%s: IGNORED: %s %s ; wrong address family' % (datetime.datetime.now(), dns_name, old_ip_address))
             continue
 
         if ip_address == old_ip_address:
-            logging.info(('UNCHANGED: %s %s' % (dns_name, ip_address)))
+            logging.info(('%s: UNCHANGED: %s %s' % (datetime.datetime.now(), dns_name, ip_address)))
             continue
 
         # Yes, we need to update this record - we know it's the same address type
@@ -78,34 +79,34 @@ def do_dns_update(cf, zone_name, zone_id, dns_name, ip_address, ip_address_type)
         try:
             dns_record = cf.zones.dns_records.put(zone_id, dns_record_id, data=dns_record)
         except CloudFlare.exceptions.CloudFlareAPIError as e:
-            logging.error('/zones.dns_records.put %s - %d %s - api call failed' % (dns_name, e, e))
+            logging.error('%s: /zones.dns_records.put %s - %d %s - api call failed' % (datetime.datetime.now(), dns_name, e, e))
             return
-        logging.info(('UPDATED: %s %s -> %s' % (dns_name, old_ip_address, ip_address)))
+        logging.info(('%s: UPDATED: %s %s -> %s' % (datetime.datetime.now(), dns_name, old_ip_address, ip_address)))
         return
 
 
 def main():
     while True:
         time.sleep(settings['update_frequency'])
-        logging.info('Verification begins')
+        logging.info('%s: Verification begins' % datetime.datetime.now())
         ip_address, ip_address_type = my_ip_address()
-        logging.info('My IP address:' + ip_address)
+        logging.info('%s: My IP address:' + ip_address % datetime.datetime.now())
         for zone in settings['zones']:
             cf = CloudFlare.CloudFlare(email=zone['email'], token=zone['api_key'])
             try:
                 params = {'name': zone['name']}
                 cfzones = cf.zones.get(params=params)
             except CloudFlare.exceptions.CloudFlareAPIError as e:
-                logging.error('/zones %d %s - api call failed' % (e, e))
+                logging.error('%s: /zones %d %s - api call failed' % (datetime.datetime.now(), e, e))
                 continue
             except Exception as e:
-                logging.error('/zones.get - %s - api call failed' % e)
+                logging.error('%s: /zones.get - %s - api call failed' % (datetime.datetime.now(), e))
                 continue
             if len(cfzones) == 0:
-                logging.error('/zones.get - %s - zone not found' % (zone['name']))
+                logging.error('%s: /zones.get - %s - zone not found' % (datetime.datetime.now(), zone['name']))
                 continue
             if len(cfzones) != 1:
-                logging.error('/zones.get - %s - api call returned %d items' % (zone['name'], len(cfzones)))
+                logging.error('%s: /zones.get - %s - api call returned %d items' % (datetime.datetime.now(), zone['name'], len(cfzones)))
                 continue
             cfzone = cfzones[0]
             zone_name = cfzone['name']
