@@ -1,5 +1,5 @@
-## How to install and use
-
+# How to install and use
+## Linux install
 1. Clone repo:
 
 `git clone https://github.com/DzenDyn/zen-cf-ddns.git`
@@ -43,5 +43,36 @@ sudo service zen-cf-ddns restart
 sudo service zen-cf-ddns status
 
 ```
+
+## Windows install
+1. Clone repo:
+
+`git clone https://github.com/DzenDyn/zen-cf-ddns.git`
+
+If you do not have git installed, install it or simply download the repository as a zip file.
+
+2. Install the Python3 from https://python.org/, during installation, add python to path.
+
+3. Go to repo dir and run cmd or powershell there as administrator.
+
+4. Update pip
+
+```
+python -m pip install --upgrade pip
+```
+
+5. Install requirements:
+
+`python -m pip install -r requirements.txt`
+
+6. Run windows_install.bat:
+
+`windows_install.bat`
+
+During the installation, a task will be created in the scheduler, which will run the script when the system starts.
+Remember to edit the configuration file before run the script.
+To run the script, double-click zen-cf-ddns-win.pyw and select run using python.
+
+To stop or apply new conf you must firstly kill pythonw.exe with taskmanager or `taskkill /im pythonw.exe /f`
 
 The project was based on a library [python-cloudflare](https://github.com/cloudflare/python-cloudflare "python-cloudflare") and uses Cloudflare API.
