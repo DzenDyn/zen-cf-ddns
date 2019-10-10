@@ -34,29 +34,18 @@ sudo service zen-cf-ddns status
 ```
 
 ## Windows install
-1. Clone repo:
-
-`git clone https://github.com/DzenDyn/zen-cf-ddns.git`
-
+1. Clone repo: `git clone https://github.com/DzenDyn/zen-cf-ddns.git`
 If you do not have git installed, install it or simply download the repository as a zip file.
 
 2. Install the Python3 from https://python.org/, during installation, add python to path.
 
 3. Go to repo dir and run cmd or powershell there as administrator.
 
-4. Update pip
+4. Update pip: `python -m pip install --upgrade pip`
 
-```
-python -m pip install --upgrade pip
-```
+5. Install requirements: `python -m pip install -r requirements.txt`
 
-5. Install requirements:
-
-`python -m pip install -r requirements.txt`
-
-6. Run windows_install.bat:
-
-`windows_install.bat`
+6. Run windows_install.bat
 
 During the installation, a task will be created in the scheduler, which will run the script when the system starts.
 
