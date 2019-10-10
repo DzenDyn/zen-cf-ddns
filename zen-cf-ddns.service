@@ -4,8 +4,8 @@ After = multi-user.target
 [Service]
 Type = simple
 User = username
-ExecStart = /usr/bin/python3  /usr/bin/zen-cf-ddns/zen-cf-ddns.py
+ExecStart = /usr/bin/python3  /usr/bin/zen-cf-ddns.py
 Restart = always
-WorkingDirectory = /usr/bin/zen-cf-ddns/
+WorkingDirectory = /usr/bin/
 [Install]
 WantedBy = multi-user.target
