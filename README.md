@@ -19,28 +19,12 @@ sudo apt install python3-pip
 
 `python3 -m pip install -r requirements.txt`
 
-5. Edit zen-cf-ddns.service file:
-``` 
-nano zen-cf-ddns.service
-Change username with your system username
+5. Run ./install.sh with sudo:
+
 ```
-
-
-6. Install service:
+chmod +x install.sh
+sudo ./install.sh
 ```
-sudo cp zen-cf-ddns.service /lib/systemd/system/zen-cf-ddns.service
-sudo mkdir /usr/bin/zen-cf-ddns/ 
-sudo cp zen-cf-ddns.py /usr/bin/zen-cf-ddns/zen-cf-ddns.py
-sudo cp zen-cf-ddns.conf /etc/zen-cf-ddns.conf
-```
-
-7. Reload systemd using command: 
-
-`sudo systemctl daemon-reload`
-
-8. Enable auto start using command:
-
-`sudo systemctl enable zen-cf-ddns.service`
 
 9. Change settings in /etc/zen-cf-ddns.conf:
 
