@@ -3,7 +3,7 @@ Description = Zen CloudFlare Dynamic DNS updater service
 After = multi-user.target
 [Service]
 Type = simple
-User = username
+User = zen-cf-ddns
 ExecStart = /usr/bin/python3  /usr/bin/zen-cf-ddns.py
 Restart = always
 WorkingDirectory = /usr/bin/
