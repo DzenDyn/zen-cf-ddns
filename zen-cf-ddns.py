@@ -128,7 +128,7 @@ def main():
             zone_id = cfzone['id']
             for a_record in zone['A_records']:
                 do_dns_update(cf, zone_name, zone_id, a_record['name'], ip_address, ip_address_type)
-            time.sleep(settings['update_frequency'])
+    time.sleep(settings['update_frequency'])
 
 
 if __name__ == '__main__':
