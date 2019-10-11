@@ -97,10 +97,10 @@ def main():
                     time.sleep(settings['update_frequency'])
                     continue
                 else:
-                    f.truncate(0)
+                    cache.truncate(0)
                     cache.write(ip_address+"\n"+ip_address_type)
             except IndexError:
-                f.truncate(0)
+                cache.truncate(0)
                 cache.write(ip_address + "\n" + ip_address_type)
         for zone in settings['zones']:
             cf = CloudFlare.CloudFlare(email=zone['email'], token=zone['api_key'])
