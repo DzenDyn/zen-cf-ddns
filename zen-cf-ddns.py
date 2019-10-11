@@ -90,14 +90,18 @@ def main():
         ip_address, ip_address_type = my_ip_address()
         logging.info('My IP address:' + ip_address)
         with open("/var/cache/zen-cf-ddns/zen-cf-ddns.cache", "w+") as cache:
-            lines = cache.readlines()
-            if ip_address == lines[0] and ip_address_type == lines[1]:
-                logging.info('IP unchanged')
-                time.sleep(settings['update_frequency'])
-                continue
-            else:
+            try:
+                lines = cache.readlines()
+                if ip_address == lines[0] and ip_address_type == lines[1]:
+                    logging.info('IP unchanged')
+                    time.sleep(settings['update_frequency'])
+                    continue
+                else:
+                    f.truncate(0)
+                    cache.write(ip_address+"\n"+ip_address_type)
+            except IndexError:
                 f.truncate(0)
-                cache.write(ip_address+"\n"+ip_address_type)
+                cache.write(ip_address + "\n" + ip_address_type)
         for zone in settings['zones']:
             cf = CloudFlare.CloudFlare(email=zone['email'], token=zone['api_key'])
             try:
