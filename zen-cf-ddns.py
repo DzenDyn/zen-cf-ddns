@@ -92,16 +92,16 @@ def main():
         with open("/var/cache/zen-cf-ddns.cache", "w+") as cache:
             try:
                 lines = cache.readlines()
-                if ip_address == lines[0] and ip_address_type == lines[1]:
+                if ip_address == lines[0].rstrip() and ip_address_type == lines[1].rstrip():
                     logging.info('IP unchanged')
                     time.sleep(settings['update_frequency'])
                     continue
                 else:
-                    logging.info("IP changed, starting update")
+                    logging.info("IP changed, starting update: "+ip_address+" "+ip_address_type)
                     cache.truncate(0)
                     cache.write(ip_address+"\n"+ip_address_type)
             except IndexError:
-                logging.error("Cache empty, recreating")
+                logging.error("Cache empty, recreating"+ip_address+" "+ip_address_type)
                 cache.truncate(0)
                 cache.write(ip_address + "\n" + ip_address_type)
         for zone in settings['zones']:
