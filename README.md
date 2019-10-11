@@ -1,31 +1,27 @@
 # How to install and use
 ## Linux install
 1. Clone repo: `git clone https://github.com/DzenDyn/zen-cf-ddns.git`
-
-2. Install the python3 and python3-pip if you do not have it:
-
-```
-sudo apt install python3
-sudo apt install python3-pip
-```
-
-3. Go to repo dir: `cd zen-cf-ddns`
-
-4. Install requirements: `python3 -m pip install -r requirements.txt`
-
-5. Run ./install.sh with sudo:
+2. Go to repo dir: `cd zen-cf-ddns`
+3. Run ./install.sh with sudo:
 
 ```
 chmod +x install.sh
 sudo ./install.sh
 ```
 
-9. Change settings in /etc/zen-cf-ddns.conf: `sudoedit /etc/zen-cf-ddns.conf `
+4. Change settings in /etc/zen-cf-ddns.conf: `sudoedit /etc/zen-cf-ddns.conf `
 
 This is a JSON configuration file, so its easy to configure.
 
 Now you can start, stop, restart or status with:
 ```
+sudo systemctl start zen-cf-ddns.service
+sudo systemctl stop zen-cf-ddns.service
+sudo systemctl restart zen-cf-ddns.service
+sudo systemctl status zen-cf-ddns.service
+
+or
+
 sudo service zen-cf-ddns start
 sudo service zen-cf-ddns stop
 sudo service zen-cf-ddns restart
