@@ -101,8 +101,8 @@ def main():
                     cache.seek(0)
                     cache.write(ip_address + "\n" + ip_address_type)
                     cache.truncate()
-            except IndexError:
-                logging.error("Cache empty, recreating"+ip_address+" "+ip_address_type)
+            except IndexError as e:
+                logging.error("Cache empty, recreating "+ip_address+" "+ip_address_type+" Exception: "+e)
                 cache.seek(0)
                 cache.write(ip_address + "\n" + ip_address_type)
                 cache.truncate()
