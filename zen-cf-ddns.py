@@ -98,12 +98,14 @@ def main():
                     continue
                 else:
                     logging.info("IP changed, starting update: "+ip_address+" "+ip_address_type)
-                    cache.truncate(0)
-                    cache.write(ip_address+"\n"+ip_address_type)
+                    cache.seek(0)
+                    cache.write(ip_address + "\n" + ip_address_type)
+                    cache.truncate()
             except IndexError:
                 logging.error("Cache empty, recreating"+ip_address+" "+ip_address_type)
-                cache.truncate(0)
+                cache.seek(0)
                 cache.write(ip_address + "\n" + ip_address_type)
+                cache.truncate()
         for zone in settings['zones']:
             cf = CloudFlare.CloudFlare(email=zone['email'], token=zone['api_key'])
             try:
