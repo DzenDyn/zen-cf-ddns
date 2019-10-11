@@ -97,9 +97,11 @@ def main():
                     time.sleep(settings['update_frequency'])
                     continue
                 else:
+                    logging.info("IP changed, starting update")
                     cache.truncate(0)
                     cache.write(ip_address+"\n"+ip_address_type)
             except IndexError:
+                logging.error("Cache empty, recreating")
                 cache.truncate(0)
                 cache.write(ip_address + "\n" + ip_address_type)
         for zone in settings['zones']:
