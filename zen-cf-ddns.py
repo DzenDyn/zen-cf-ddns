@@ -86,9 +86,8 @@ def do_dns_update(cf, zone_name, zone_id, dns_name, ip_address, ip_address_type)
 
 
 def main():
-    while True:
-        time.sleep(settings['update_frequency'])
-        logging.info('%s: Verification begins' % datetime.datetime.now())
+    while True:       
+        logging.info('Verification begins')
         ip_address, ip_address_type = my_ip_address()
         logging.info('My IP address:' + ip_address)
         for zone in settings['zones']:
@@ -113,6 +112,7 @@ def main():
             zone_id = cfzone['id']
             for a_record in zone['A_records']:
                 do_dns_update(cf, zone_name, zone_id, a_record['name'], ip_address, ip_address_type)
+            time.sleep(settings['update_frequency'])
 
 
 if __name__ == '__main__':
