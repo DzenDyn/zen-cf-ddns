@@ -89,23 +89,16 @@ def main():
         logging.info('Verification begins')
         ip_address, ip_address_type = my_ip_address()
         logging.info('My IP address:' + ip_address)
-        with open("/var/cache/zen-cf-ddns.cache", "w+") as cache:
-            try:
-                lines = cache.readlines()
-                if ip_address == lines[0].rstrip() and ip_address_type == lines[1].rstrip():
-                    logging.info('IP unchanged')
-                    time.sleep(settings['update_frequency'])
-                    continue
-                else:
-                    logging.info("IP changed, starting update: "+ip_address+" "+ip_address_type)
-                    cache.seek(0)
-                    cache.write(ip_address + "\n" + ip_address_type)
-                    cache.truncate()
-            except IndexError as e:
-                logging.error("Cache empty, recreating "+ip_address+" "+ip_address_type+" Exception: "+e.__str__())
-                cache.seek(0)
-                cache.write(ip_address + "\n" + ip_address_type)
-                cache.truncate()
+        with open("/var/cache/zen-cf-ddns.cache", "w+") as cache_file:
+            cache_js = json.load(cache_file)
+            if ip_address == cache_js["ip_address"] and ip_address_type == cache_js["ip_address_type"]:
+                logging.info('IP unchanged')
+                time.sleep(settings['update_frequency'])
+                continue
+            else:
+                logging.info("IP changed, starting update: "+ip_address+" "+ip_address_type)
+                cache = {'ip_address': ip_address, 'ip_address_type': ip_address_type}
+                json.dump(cache, cache_file)
         for zone in settings['zones']:
             cf = CloudFlare.CloudFlare(email=zone['email'], token=zone['api_key'])
             try:
