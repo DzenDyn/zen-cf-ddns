@@ -5,6 +5,9 @@ echo -e "\e[91mRun installation with sudo to continue"
 echo -e "\e[0m"
 exit
 fi
+sudo apt install python3
+sudo apt install python3-pip
+sudo apt install python3-venv
 sudo python3 -m venv /usr/lib/zen-cf-ddns
 /usr/lib/zen-cf-ddns/bin/pip install --upgrade pip
 /usr/lib/zen-cf-ddns/bin/pip install -r requirements.txt
