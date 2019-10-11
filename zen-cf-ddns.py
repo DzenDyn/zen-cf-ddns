@@ -89,7 +89,7 @@ def main():
         logging.info('Verification begins')
         ip_address, ip_address_type = my_ip_address()
         logging.info('My IP address:' + ip_address)
-        with open("/var/cache/zen-cf-ddns/zen-cf-ddns.cache", "w+") as cache:
+        with open("/var/cache/zen-cf-ddns.cache", "w+") as cache:
             try:
                 lines = cache.readlines()
                 if ip_address == lines[0] and ip_address_type == lines[1]:
