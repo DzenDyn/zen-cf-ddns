@@ -102,7 +102,7 @@ def main():
                     json.dump(cache, cache_file)
         except json.JSONDecodeError as exc:
             with open("/var/cache/zen-cf-ddns.cache", "w+") as cache_file:
-                logging.info("Cache empty, recreate: " + ip_address + " " + ip_address_type+"\nerror: "+exc.__str__())
+                logging.info("Cache empty, recreate: " + ip_address + " " + ip_address_type+"\nerror: "+exc.__str__()+"\nJson contains: "+cache_js["ip_address"]+" "+cache_js["ip_address_type"])
                 cache = {'ip_address': ip_address, 'ip_address_type': ip_address_type}
                 json.dump(cache, cache_file)
         logging.info("Starting update")
