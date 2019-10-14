@@ -92,6 +92,8 @@ def main():
         try:
             with open("/var/cache/zen-cf-ddns.cache", "w+") as cache_file:
                 cache_js = json.load(cache_file)
+                logging.debug(cache_js)
+                logging.debug(cache_js["ip_address"])
                 if ip_address == cache_js["ip_address"] and ip_address_type == cache_js["ip_address_type"]:
                     logging.info('IP unchanged')
                     time.sleep(settings['update_frequency'])
