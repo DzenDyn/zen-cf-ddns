@@ -100,9 +100,9 @@ def main():
                     logging.info("IP changed, starting update: "+ip_address+" "+ip_address_type)
                     cache = {'ip_address': ip_address, 'ip_address_type': ip_address_type}
                     json.dump(cache, cache_file)
-        except json.JSONDecodeError as e:
+        except json.JSONDecodeError as exc:
             with open("/var/cache/zen-cf-ddns.cache", "w+") as cache_file:
-                logging.info("Cache empty, recreate: " + ip_address + " " + ip_address_type)
+                logging.info("Cache empty, recreate: " + ip_address + " " + ip_address_type+"\nerror: "+exc.__str__())
                 cache = {'ip_address': ip_address, 'ip_address_type': ip_address_type}
                 json.dump(cache, cache_file)
         logging.info("Starting update")
