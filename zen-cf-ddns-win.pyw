@@ -4,7 +4,6 @@ import json
 import requests
 import time
 import logging
-import datetime
 
 
 with open('zen-cf-ddns.conf', 'r') as f:
@@ -41,7 +40,7 @@ def do_dns_update(cf, zone_name, zone_id, dns_name, ip_address, ip_address_type)
     """Cloudflare API code - example"""
 
     try:
-        params = {'name':dns_name, 'match':'all', 'type':ip_address_type}
+        params = {'name': dns_name, 'match': 'all', 'type': ip_address_type}
         dns_records = cf.zones.dns_records.get(zone_id, params=params)
     except CloudFlare.exceptions.CloudFlareAPIError as e:
         logging.error('/zones/dns_records %s - %d %s - api call failed' % (dns_name, e, e))
@@ -87,10 +86,26 @@ def do_dns_update(cf, zone_name, zone_id, dns_name, ip_address, ip_address_type)
 
 def main():
     while True:
-        time.sleep(settings['update_frequency'])
-        logging.info('%s: Verification begins' % datetime.datetime.now())
+        logging.info('Verification begins')
         ip_address, ip_address_type = my_ip_address()
         logging.info('My IP address:' + ip_address)
+        try:
+            with open("zen-cf-ddns.cache", "r+", encoding='utf-8') as cache_file:
+                cache_js = json.loads(cache_file.read())
+                if ip_address == cache_js["ip_address"] and ip_address_type==cache_js["ip_address_type"]:
+                    logging.info('IP unchanged')
+                    time.sleep(settings['update_frequency'])
+                    continue
+                else:
+                    logging.info("IP changed, starting update: "+ip_address+" "+ip_address_type)
+                    cache = {'ip_address': ip_address, 'ip_address_type': ip_address_type}
+                    json.dump(cache, cache_file)
+        except Exception as exc:
+            with open("zen-cf-ddns.cache", "w+", encoding='utf-8') as cache_file:
+                logging.info("Cache empty, recreate: " + ip_address + " " + ip_address_type+"\nerror: "+exc.__str__())
+                cache = {'ip_address': ip_address, 'ip_address_type': ip_address_type}
+                json.dump(cache, cache_file, ensure_ascii=False, indent=4)
+        logging.info("Starting update")
         for zone in settings['zones']:
             cf = CloudFlare.CloudFlare(email=zone['email'], token=zone['api_key'])
             try:
@@ -113,6 +128,7 @@ def main():
             zone_id = cfzone['id']
             for a_record in zone['A_records']:
                 do_dns_update(cf, zone_name, zone_id, a_record['name'], ip_address, ip_address_type)
+    time.sleep(settings['update_frequency'])
 
 
 if __name__ == '__main__':
