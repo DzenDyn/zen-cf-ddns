@@ -36,7 +36,7 @@ def my_ip_address():
     return ip_address, ip_address_type
 
 
-def do_dns_update(cf, zone_name, zone_id, dns_name, ip_address, ip_address_type):
+def do_dns_update(cf, zone_name, zone_id, dns_name, ip_address, ip_address_type, proxied):
     """Cloudflare API code - example"""
 
     try:
@@ -73,7 +73,8 @@ def do_dns_update(cf, zone_name, zone_id, dns_name, ip_address, ip_address_type)
         dns_record = {
             'name': dns_name,
             'type': ip_address_type,
-            'content': ip_address
+            'content': ip_address,
+            'proxied': proxied
         }
         try:
             dns_record = cf.zones.dns_records.put(zone_id, dns_record_id, data=dns_record)
@@ -127,7 +128,7 @@ def main():
             zone_name = cfzone['name']
             zone_id = cfzone['id']
             for a_record in zone['A_records']:
-                do_dns_update(cf, zone_name, zone_id, a_record['name'], ip_address, ip_address_type)
+                do_dns_update(cf, zone_name, zone_id, a_record['name'], ip_address, ip_address_type, a_record['proxied'])
     time.sleep(settings['update_frequency'])
 
 
