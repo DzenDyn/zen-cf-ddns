@@ -1,3 +1,5 @@
 venv/
 zen-cf-ddns.log
 .idea/
+__pycache__/
+zen-cf-ddns.cache
