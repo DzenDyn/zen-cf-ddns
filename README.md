@@ -1,3 +1,6 @@
+#About
+Dynamic DNS client based on CloudFlare API.
+Can be used as alternative to ddclient.
 # How to install and use
 ## Linux install
 1. Clone repo: `git clone https://github.com/DzenDyn/zen-cf-ddns.git`
