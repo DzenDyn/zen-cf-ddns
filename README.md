@@ -8,7 +8,7 @@ Can be used as alternative to ddclient.
 3. Edit configuration file zen-cf-ddns.conf
 4. Run `docker build .`
 
-or visit docker hub[docker hub](https://hub.docker.com/repository/docker/dzendyn/zen-cf-ddns "docker hub")  
+or visit [docker hub](https://hub.docker.com/repository/docker/dzendyn/zen-cf-ddns "docker hub")  
 
 ## Linux install
 1. Clone repo: `git clone https://github.com/DzenDyn/zen-cf-ddns.git`
