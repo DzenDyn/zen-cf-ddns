@@ -3,12 +3,11 @@ Dynamic DNS client based on CloudFlare API.
 Can be used as alternative to ddclient.
 # How to install and use
 ## Docker
+Run: `docker pull dzendyn/zen-cf-ddns:latest` or :
 1. Clone repo: `git clone https://github.com/DzenDyn/zen-cf-ddns.git`
 2. Go to repo dir: `cd zen-cf-ddns`
 3. Edit configuration file zen-cf-ddns.conf
-4. Run `docker build .`
-
-or visit [docker hub](https://hub.docker.com/repository/docker/dzendyn/zen-cf-ddns "docker hub")  
+4. Run `docker build .` 
 
 ## Linux install
 1. Clone repo: `git clone https://github.com/DzenDyn/zen-cf-ddns.git`
